@@ -1,0 +1,21 @@
+{
+    "files.autoSave": "afterDelay",
+    "workbench.colorTheme": "Dracula Theme",
+    "workbench.editor.showTabs": "single",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "$HOME/.vimrc",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["j"],
+            "after": ["g", "j"]
+        },
+        {
+            "before": ["k"],
+            "after": ["g", "k"]
+        }
+    ],
+    "editor.lineNumbers": "relative",
+    "[search-result]": {
+        "editor.lineNumbers": "on"
+    }
+}
