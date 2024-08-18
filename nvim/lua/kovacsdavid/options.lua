@@ -19,3 +19,4 @@ vim.opt.undofile = true -- save undo information in a file
 vim.opt.shortmess:append({ I = true }) -- start with empty screen
 vim.opt.secure = true -- secure mode for reading .vimrc in current dir
 vim.opt.titlestring = '%f - nvim' -- string to use for the Vim window title
+vim.api.nvim_command('filetype plugin indent off')

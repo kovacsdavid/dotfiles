@@ -20,3 +20,6 @@ vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', {desc='Previous Buffer'}
 wk.add({
     {"<leader>b", group = "Buffer"}
 })
+
+
+vim.keymap.set('n', '<M-1>', vim.cmd.Ex, {desc='File Explorer'})
