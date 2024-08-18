@@ -34,3 +34,6 @@ require("lazy").setup('kovacsdavid.plugins', {
   },
 })
 
+-- Enable rose-pine colorscheme
+vim.cmd("colorscheme rose-pine")
+
