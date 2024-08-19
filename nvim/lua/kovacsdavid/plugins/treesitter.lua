@@ -12,6 +12,7 @@ return {
               "query",
               "javascript",
               "typescript",
+              "vue",
               "html",
               "go",
               "goctl",
