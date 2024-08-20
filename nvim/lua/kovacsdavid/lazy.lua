@@ -113,3 +113,6 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({}),
 })
+
+-- start lualine with default config
+require('lualine').setup({})
