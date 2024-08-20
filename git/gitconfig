@@ -21,6 +21,8 @@
 
     co = checkout
 
+    s = status
+
 [include]
     path = ~/.gitconfig_local
 [commit]
