@@ -24,7 +24,7 @@ wk.add({
 vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'}) 
 
 
-vim.keymap.set('n', '<M-1>', vim.cmd.Ex, {desc='File Explorer'})
+vim.keymap.set('n', '<M-1>', '<cmd>Neotree<cr>', {desc='File Explorer'})
 
 -- remap split switches
 vim.keymap.set('n', '<C-j>', '<C-W>j', {desc='Jump to bottom split'})
@@ -40,4 +40,3 @@ vim.keymap.set('n', '<leader>tt', builtin.find_files, {desc='Next tab'})
 wk.add({
     {"<leader>t", group = "Tabs"}
 })
-
