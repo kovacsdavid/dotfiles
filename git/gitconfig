@@ -1,0 +1,37 @@
+[alias]
+    a = add
+    aa = add --all
+    ai = add --interactive
+
+    b = branch
+    ba = branch --all
+    bd = branch --delete
+    bm = branch --move
+
+    c = commit
+    ca = commit --amend
+    cm = commit --message
+
+    d = diff
+    ds = diff --staged
+
+    l = log
+    lg = log --graph
+    lp = log --patch
+
+    co = checkout
+
+[include]
+    path = ~/.gitconfig_local
+[commit]
+	gpgSign = true
+[core]
+	editor = nvim
+[init]
+    defaultBranch = main
+[pull]
+    rebase = false
+[diff]
+    tool = vimdiff
+[merge]
+	tool = vimdiff
