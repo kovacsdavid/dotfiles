@@ -116,3 +116,4 @@ cmp.setup({
 
 -- start lualine with default config
 require('lualine').setup({})
+
