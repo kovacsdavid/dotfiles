@@ -33,9 +33,10 @@ vim.keymap.set('n', '<C-h>', '<C-W>h', {desc='Jump to left split'})
 vim.keymap.set('n', '<C-l>', '<C-W>l', {desc='Jump to right split'})
 
 -- tabs keymaps
-vim.keymap.set('n', '<leader>tn', builtin.find_files, {desc='New tab'})
-vim.keymap.set('n', '<leader>tc', builtin.find_files, {desc='Close tab'})
-vim.keymap.set('n', '<leader>tt', builtin.find_files, {desc='Next tab'})
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', {desc='New tab'})
+vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', {desc='Close tab'})
+vim.keymap.set('n', '<leader>tt', '<cmd>tabnext<cr>', {desc='Next tab'})
+vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', {desc='Next tab'})
 
 wk.add({
     {"<leader>t", group = "Tabs"}
