@@ -9,6 +9,7 @@ vim.opt.tabstop = 4 -- number of spaces to use for (auto)indent stepnumber of sp
 vim.opt.softtabstop = 4 -- number of spaces that <Tab> uses while editing
 vim.opt.mouse = '' -- enable the use of mouse clicks
 vim.opt.expandtab = true -- use spaces when <Tab> is inserted
+vim.opt.smarttab = true -- use 'shiftwidth' when inserting <Tab>
 vim.opt.title = true -- let Vim set the title of the window
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.wrap = false -- long lines wrap and continue on the next line

@@ -21,5 +21,23 @@ wk.add({
     {"<leader>b", group = "Buffer"}
 })
 
+vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'}) 
+
 
 vim.keymap.set('n', '<M-1>', vim.cmd.Ex, {desc='File Explorer'})
+
+-- remap split switches
+vim.keymap.set('n', '<C-j>', '<C-W>j', {desc='Jump to bottom split'})
+vim.keymap.set('n', '<C-k>', '<C-W>k', {desc='Jump to top split'})
+vim.keymap.set('n', '<C-h>', '<C-W>h', {desc='Jump to left split'})
+vim.keymap.set('n', '<C-l>', '<C-W>l', {desc='Jump to right split'})
+
+-- tabs keymaps
+vim.keymap.set('n', '<leader>tn', builtin.find_files, {desc='New tab'})
+vim.keymap.set('n', '<leader>tc', builtin.find_files, {desc='Close tab'})
+vim.keymap.set('n', '<leader>tt', builtin.find_files, {desc='Next tab'})
+
+wk.add({
+    {"<leader>t", group = "Tabs"}
+})
+
