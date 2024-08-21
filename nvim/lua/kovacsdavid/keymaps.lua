@@ -22,7 +22,10 @@ wk.add({
 })
 
 vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'}) 
-
+vim.keymap.set('v', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
+vim.keymap.set('n', '<C-s>', '<cmd>w<cr>', {desc='Save file'})
+vim.keymap.set('n', '<C-a>', 'ggVG', {desc='Select all'})
+vim.keymap.set('n', '<C-n>', '<cmd>:noh<cr>', {desc='Remove search highlight'})
 
 vim.keymap.set('n', '<M-1>', '<cmd>Neotree<cr>', {desc='File Explorer'})
 
