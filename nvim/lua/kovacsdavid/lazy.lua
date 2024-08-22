@@ -34,8 +34,8 @@ require("lazy").setup('kovacsdavid.plugins', {
     },
 })
 
--- Enable rose-pine colorscheme
-vim.cmd("colorscheme rose-pine")
+-- Enable theme
+vim.cmd("colorscheme tokyonight-night")
 
 
 -- lsp-zero
@@ -87,7 +87,8 @@ require('lspconfig').volar.setup({
     filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
     init_options = {
         vue = {
-            hybridMode = false,
+            -- hybridMode = false,
+            hybridMode = true,
         },
         typescript = {
             tsdk = home .. "/.nvm/versions/node/v22.6.0/lib/node_modules/typescript/lib",
@@ -117,5 +118,11 @@ cmp.setup({
 -- start lualine with default config
 require('lualine').setup({})
 
-require("ibl").setup()
+require("ibl").setup({
+    exclude = {
+        filetypes = {
+            "dashboard",
+        },
+    },
+})
 
