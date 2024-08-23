@@ -58,15 +58,17 @@ local lsp_attach = function(client, bufnr)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 lsp_zero.extend_lspconfig({
     sign_text = true,
     lsp_attach = lsp_attach,
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+    capabilities = capabilities,
 })
 
 local home = os.getenv("HOME")
 
 require('lspconfig').tsserver.setup({
+    capabilities = capabilities,
   init_options = {
     plugins = {
       {
@@ -82,8 +84,11 @@ require('lspconfig').tsserver.setup({
     "vue",
   },
 })
-require('lspconfig').phpactor.setup({})
+require('lspconfig').phpactor.setup({
+    capabilities = capabilities,
+})
 require('lspconfig').volar.setup({
+    capabilities = capabilities,
     filetypes = { "vue", "javascript", "typescript", "javascriptreact", "typescriptreact" },
     init_options = {
         vue = {
@@ -95,7 +100,9 @@ require('lspconfig').volar.setup({
         },
     },
 })
-require('lspconfig').eslint.setup({})
+require('lspconfig').eslint.setup({
+    capabilities = capabilities,
+})
 
 ---
 -- Autocompletion setup
@@ -107,6 +114,7 @@ cmp.setup({
         {name = 'nvim_lsp'},
         {name = 'buffer'},
         {name = 'path'},
+        {name = 'luasnip'},
     },
     snippet = {
         expand = function(args)
@@ -128,3 +136,58 @@ require("ibl").setup({
     },
 })
 
+
+require("neo-tree").setup({
+    filesystem = {
+        filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            hide_gitignored = false,
+        },
+        follow_current_file = {
+            enabled = true,
+            leave_dirs_open = false,
+        },
+    }
+})
+
+require('telescope').setup({
+    defaults = {
+        vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--hidden',
+
+            -- Exclude some patterns from search
+            "--glob=!**/.git/*",
+            "--glob=!**/.idea/*",
+            "--glob=!**/.vscode/*",
+            "--glob=!**/build/*",
+            "--glob=!**/dist/*",
+            "--glob=!**/yarn.lock",
+            "--glob=!**/package-lock.json",
+        },
+    },
+    pickers = {
+        find_files = {
+            hidden = true,
+            find_command = {
+                "rg",
+                "--files",
+                "--hidden",
+                "--glob=!**/.git/*",
+                "--glob=!**/.idea/*",
+                "--glob=!**/.vscode/*",
+                "--glob=!**/build/*",
+                "--glob=!**/dist/*",
+                "--glob=!**/yarn.lock",
+                "--glob=!**/package-lock.json",
+            },
+        },
+    },
+})
