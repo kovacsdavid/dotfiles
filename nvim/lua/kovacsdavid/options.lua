@@ -2,6 +2,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.have_nerd_font = true -- Set to true if you have a Nerd Font installed and selected in the terminal
+
 vim.opt.number = true -- print the line number in front of each line
 vim.opt.relativenumber = true -- show relative line number in front of each line
 vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
@@ -13,9 +15,11 @@ vim.opt.smarttab = true -- use 'shiftwidth' when inserting <Tab>
 vim.opt.title = true -- let Vim set the title of the window
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.wrap = false -- long lines wrap and continue on the next line
-vim.opt.scrolloff = 8 -- minimum nr. of lines above and below cursor
-vim.opt.sidescrolloff = 8 -- min. nr. of columns to left and right of cursor
-vim.opt.clipboard = 'unnamedplus' -- use linux clipboard
+vim.opt.scrolloff = 10 -- minimum nr. of lines above and below cursor
+vim.opt.sidescrolloff = 10 -- min. nr. of columns to left and right of cursor
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end) -- use linux clipboard
 vim.opt.undofile = true -- save undo information in a file
 vim.opt.shortmess:append({ I = true }) -- start with empty screen
 vim.opt.secure = true -- secure mode for reading .vimrc in current dir
@@ -26,3 +30,20 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 }) -- autoremove trailing white spaces
+
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+

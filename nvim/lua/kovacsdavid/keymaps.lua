@@ -21,7 +21,7 @@ wk.add({
     {"<leader>b", group = "Buffer"}
 })
 
-vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'}) 
+vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
 vim.keymap.set('v', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
 vim.keymap.set('n', '<C-s>', '<cmd>w<cr>', {desc='Save file'})
 vim.keymap.set('n', '<C-a>', 'ggVG', {desc='Select all'})
@@ -44,3 +44,10 @@ vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', {desc='Next tab'})
 wk.add({
     {"<leader>t", group = "Tabs"}
 })
+
+-- Disable arrow keys in normal mode
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
