@@ -1,39 +1,47 @@
 [alias]
-    a = add
-    aa = add --all
-    ai = add --interactive
+a = add
+aa = add --all
+ai = add --interactive
 
-    b = branch
-    ba = branch --all
-    bd = branch --delete
-    bm = branch --move
+b = branch
+ba = branch --all
+bd = branch --delete
+bm = branch --move
 
-    c = commit
-    ca = commit --amend
-    cm = commit --message
+c = commit
+ca = commit --amend
+cm = commit --message
 
-    d = diff
-    ds = diff --staged
+d = diff
+ds = diff --staged
 
-    l = log
-    lg = log --graph
-    lp = log --patch
+l = log
+lg = log --graph
+lp = log --patch
 
-    co = checkout
+co = checkout
 
-    s = status
+s = status
 
 [include]
-    path = ~/.gitconfig_local
+path = ~/.gitconfig_local
+
 [commit]
-	gpgSign = true
+gpgSign = true
+
 [core]
-	editor = nvim
+editor = nvim
+
 [init]
-    defaultBranch = main
+defaultBranch = main
+
 [pull]
-    rebase = false
+rebase = false
+
 [diff]
-    tool = vimdiff
+tool = vimdiff
+
 [merge]
-	tool = vimdiff
+tool = vimdiff
+conflictstyle = diff3
+
