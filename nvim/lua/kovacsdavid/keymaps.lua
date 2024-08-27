@@ -2,23 +2,23 @@ local wk = require('which-key');
 
 -- telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc='Find Files'})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc='Live Grep'})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc='Buffers'})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc='Help Tags'})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {desc='[F]ind [F]iles'})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc='[F]ind [G]rep'})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {desc='[F]ind [B]uffer'})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {desc='[F]ind [H]elp'})
 
 
 wk.add({
-    {"<leader>f", group = "Find"}
+    {"<leader>f", group = "[F]ind"}
 })
 
 -- own keys
-vim.keymap.set('n', '<leader>bl', '<cmd>buffers<cr>', {desc='List Buffers'})
-vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', {desc='Next Buffer'})
-vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', {desc='Previous Buffer'})
+vim.keymap.set('n', '<leader>bl', '<cmd>buffers<cr>', {desc='[B]uffer [L]ist'})
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', {desc='[B]uffer [N]ext'})
+vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', {desc='[B]uffer [P]revious'})
 
 wk.add({
-    {"<leader>b", group = "Buffer"}
+    {"<leader>b", group = "[B]uffer"}
 })
 
 vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
@@ -36,13 +36,13 @@ vim.keymap.set('n', '<C-h>', '<C-W>h', {desc='Jump to left split'})
 vim.keymap.set('n', '<C-l>', '<C-W>l', {desc='Jump to right split'})
 
 -- tabs keymaps
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', {desc='New tab'})
-vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', {desc='Close tab'})
-vim.keymap.set('n', '<leader>tt', '<cmd>tabnext<cr>', {desc='Next tab'})
-vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', {desc='Next tab'})
+vim.keymap.set('n', '<leader>tt', '<cmd>tabnew<cr>', {desc='[T]ab New'})
+vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', {desc='[T]ab [C]lose'})
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>', {desc='[T]ab [N]ext'})
+vim.keymap.set('n', '<leader>tp', '<cmd>tabprevious<cr>', {desc='[T]ab [P]revious'})
 
 wk.add({
-    {"<leader>t", group = "Tabs"}
+    {"<leader>t", group = "[T]abs"}
 })
 
 -- Disable arrow keys in normal mode

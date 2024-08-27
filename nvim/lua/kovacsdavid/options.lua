@@ -84,3 +84,6 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+-- enable the use of mouse clicks
+vim.opt.mouse = 'a'
+
