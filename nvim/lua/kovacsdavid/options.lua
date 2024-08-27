@@ -2,35 +2,75 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.have_nerd_font = true -- Set to true if you have a Nerd Font installed and selected in the terminal
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
 
-vim.opt.number = true -- print the line number in front of each line
-vim.opt.relativenumber = true -- show relative line number in front of each line
-vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
-vim.opt.tabstop = 4 -- number of spaces to use for (auto)indent stepnumber of spaces that <Tab> in file uses
-vim.opt.softtabstop = 4 -- number of spaces that <Tab> uses while editing
-vim.opt.mouse = '' -- enable the use of mouse clicks
-vim.opt.expandtab = true -- use spaces when <Tab> is inserted
-vim.opt.smarttab = true -- use 'shiftwidth' when inserting <Tab>
-vim.opt.title = true -- let Vim set the title of the window
-vim.opt.ignorecase = true -- ignore case in search patterns
-vim.opt.wrap = false -- long lines wrap and continue on the next line
-vim.opt.scrolloff = 10 -- minimum nr. of lines above and below cursor
-vim.opt.sidescrolloff = 10 -- min. nr. of columns to left and right of cursor
+-- print the line number in front of each line
+vim.opt.number = true
+
+-- show relative line number in front of each line
+vim.opt.relativenumber = true
+
+-- number of spaces to use for (auto)indent step
+vim.opt.shiftwidth = 4
+
+-- number of spaces to use for (auto)indent stepnumber of spaces that <Tab> in file uses
+vim.opt.tabstop = 4
+
+-- number of spaces that <Tab> uses while editing
+vim.opt.softtabstop = 4
+
+-- enable the use of mouse clicks
+vim.opt.mouse = ''
+
+-- use spaces when <Tab> is inserted
+vim.opt.expandtab = true
+
+-- use 'shiftwidth' when inserting <Tab>
+vim.opt.smarttab = true
+
+-- let Vim set the title of the window
+vim.opt.title = true
+
+-- ignore case in search patterns
+vim.opt.ignorecase = true
+
+-- long lines wrap and continue on the next line
+vim.opt.wrap = false
+
+-- minimum nr. of lines above and below cursor
+vim.opt.scrolloff = 10
+
+-- min. nr. of columns to left and right of cursor
+vim.opt.sidescrolloff = 10
+
+-- use linux clipboard
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
-end) -- use linux clipboard
-vim.opt.undofile = true -- save undo information in a file
-vim.opt.shortmess:append({ I = true }) -- start with empty screen
-vim.opt.secure = true -- secure mode for reading .vimrc in current dir
-vim.opt.titlestring = '%f - nvim' -- string to use for the Vim window title
+end)
+
+ -- save undo information in a file
+vim.opt.undofile = true
+
+-- start with empty screen
+vim.opt.shortmess:append({ I = true })
+
+-- secure mode for reading .vimrc in current dir
+vim.opt.secure = true
+
+ -- string to use for the Vim window title
+vim.opt.titlestring = '%f - nvim'
+
 vim.api.nvim_command('filetype plugin indent on')
-vim.opt.breakindent = true; -- wrapped line repeats indent
+
+-- wrapped line repeats indent
+vim.opt.breakindent = true;
+
+-- autoremove trailing white spaces
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
-}) -- autoremove trailing white spaces
-
+})
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -38,11 +78,8 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
-
-
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
-
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
