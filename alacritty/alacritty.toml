@@ -28,3 +28,10 @@ magenta = "#bb9af7"
 cyan = "#0db9d7"
 white = "#acb0d0"
 
+[font]
+size = 12
+
+[font.normal]
+family = "3270 Nerd Font"
+style = "Regular"
+
