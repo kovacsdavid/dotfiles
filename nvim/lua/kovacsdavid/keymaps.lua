@@ -51,3 +51,12 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- Diagnostic keymap
+vim.keymap.set('n', '<leader>df', '<cmd>lua vim.diagnostic.open_float()<cr>', {desc='[D]iagnostic [F]loat'})
+vim.keymap.set('n', '<leader>dn', '<cmd>lua vim.diagnostic.goto_next()<cr>', {desc='[D]iagnostic [N]ext'})
+vim.keymap.set('n', '<leader>dp', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {desc='[D]iagnostic [P]revious'})
+
+wk.add({
+    {"<leader>d", group = "[D]iagnostics"}
+})
+

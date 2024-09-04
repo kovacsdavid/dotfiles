@@ -84,3 +84,8 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+-- disable inline diagnostic
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
