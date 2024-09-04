@@ -7,6 +7,7 @@ return {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-cmdline',
+    'rafamadriz/friendly-snippets'
   },
   config = function()
     local cmp = require('cmp')
@@ -26,5 +27,6 @@ return {
         },
         mapping = cmp.mapping.preset.insert({}),
     })
+    require("luasnip.loaders.from_vscode").lazy_load()
   end
 }
