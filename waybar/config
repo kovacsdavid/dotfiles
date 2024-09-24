@@ -1,0 +1,80 @@
+
+{
+    // "layer": "top", // Waybar at top layer
+     "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 5, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-right": ["pulseaudio", "network", "backlight", "cpu", "memory", "battery", "battery#bat2", "clock", "tray"],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%I:%M }",
+        "format-alt": "{:%Y-%m-%d}"
+
+    },
+    "cpu": {
+        "format": "CPU: {usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "MEM: {}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "TEMP: {temperatureC}°C {icon}",
+    },
+    "backlight": {
+        "format": "BLIGHT: {percent}% ",
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% ",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{time} ",
+    },
+    "battery": {
+        "bat": "BAT0",
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 5
+        },
+        "format": "BAT0: {capacity}%",
+        "format-charging": "BAT0: {capacity}% (charging)",
+        "format-plugged": "BAT0: {capacity}% (plugged)",
+    },
+    "battery#bat2": {
+        "bat": "PWR: BAT2"
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "NET: {essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "AUDIO: {volume}%  {format_source}",
+        "format-bluetooth": "AUDIO: {volume}%  {format_source}",
+        "format-bluetooth-muted": "AUDIO: {format_source}",
+        "format-muted": "AUDIO: {format_source}",
+        "format-source": "MIC: {volume}%",
+        "format-source-muted": "MIC: MUTED",
+        "on-click": "pavucontrol"
+    },
+}

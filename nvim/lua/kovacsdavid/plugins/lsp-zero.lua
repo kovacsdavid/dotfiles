@@ -44,6 +44,7 @@ return {
                 'phpactor',
                 'eslint',
                 'volar',
+                'gopls',
                 'lua_ls',
             },
             handlers = {

@@ -29,7 +29,7 @@ cyan = "#0db9d7"
 white = "#acb0d0"
 
 [font]
-size = 8
+size = 10
 
 [font.normal]
 family = "3270 Nerd Font"
