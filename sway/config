@@ -226,4 +226,7 @@ bar {
     }
 }
 
+bindsym $mod+Mod1+l exec swaylock -c 000000
+bindsym $mod+Mod1+t exec swaymsg 'output eDP-1 toggle'
+
 include /etc/sway/config.d/*
