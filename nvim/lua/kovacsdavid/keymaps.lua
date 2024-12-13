@@ -60,3 +60,31 @@ wk.add({
     {"<leader>d", group = "[D]iagnostics"}
 })
 
+
+-- Debugging keymap
+local dap = require('dap')
+vim.keymap.set('n', '<F5>', function() dap.continue() end)
+vim.keymap.set('n', '<F10>', function() dap.step_over() end)
+vim.keymap.set('n', '<F11>', function() dap.step_into() end)
+vim.keymap.set('n', '<F12>', function() dap.step_out() end)
+vim.keymap.set('n', '<Leader>et', function() dap.toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>er', function() dap.repl.open() end)
+vim.keymap.set('n', '<Leader>el', function() dap.run_last() end)
+vim.keymap.set({'n', 'v'}, '<Leader>eh', function()
+    require('dap.ui.widgets').hover()
+end)
+vim.keymap.set({'n', 'v'}, '<Leader>ep', function()
+    require('dap.ui.widgets').preview()
+end)
+vim.keymap.set('n', '<Leader>ef', function()
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>es', function()
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.scopes)
+end)
+
+wk.add({
+    {"<leader>e", group = "D[e]bugging"}
+})

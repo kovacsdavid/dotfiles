@@ -40,11 +40,12 @@ return {
             -- Replace the language servers listed here
             -- with the ones you want to install
             ensure_installed = {
-                'tsserver',
+                'ts_ls',
                 'phpactor',
                 'eslint',
                 'volar',
                 'gopls',
+                'rust_analyzer',
                 'lua_ls',
             },
             handlers = {
@@ -85,11 +86,11 @@ return {
                         },
                     })
                 end,
-                ["tsserver"] = function()
+                ["ts_ls"] = function()
                     local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
                     local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
-                    require("lspconfig").tsserver.setup({
+                    require("lspconfig").ts_ls.setup({
                         capabilities = capabilities,
                         init_options = {
                             plugins = {
