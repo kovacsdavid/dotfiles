@@ -6,7 +6,7 @@ plugins=(sudo git docker history zsh-autosuggestions z)
 
 source $ZSH/oh-my-zsh.sh
 
-alias ll="ls -lah"
+alias ll="eza -la"
 alias vim="nvim"
 
 export PATH=$PATH:/usr/local/go/bin
