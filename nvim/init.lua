@@ -139,6 +139,7 @@ require("lazy").setup({
               '--column',
               '--smart-case',
               '--hidden',
+              '--no-ignore-vcs',
 
               -- Exclude some patterns from search
               "--glob=!**/.git/*",
@@ -158,6 +159,7 @@ require("lazy").setup({
                 "rg",
                 "--files",
                 "--hidden",
+                "--no-ignore-vcs",
                 "--glob=!**/.git/*",
                 "--glob=!**/.idea/*",
                 "--glob=!**/.vscode/*",
@@ -320,6 +322,8 @@ require("lazy").setup({
           mapping = cmp.mapping.preset.insert({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
             ['<C-y>'] = cmp.mapping.confirm({ select = true }),
             ["<C-Space>"] = cmp.mapping.complete(),
           }),
@@ -353,6 +357,16 @@ require("lazy").setup({
       event = "VeryLazy",
       opts = {},
     },
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-tree/nvim-web-devicons", -- optional, but recommended
+      },
+      lazy = false, -- neo-tree will lazily load itself
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -573,3 +587,4 @@ vim.keymap.set('n', '<leader>sb', '<cmd>set scb!<cr>', {desc='Toggle [S]croll[b]
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc='[U]ndotreeToggle'})
 
 vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>', {desc='[G]it'})
+vim.keymap.set({ 'n' }, '<A-1>', '<cmd>Neotree<cr>')
