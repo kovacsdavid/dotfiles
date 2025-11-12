@@ -103,18 +103,27 @@ vim.o.shiftwidth = 2
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- add your plugins here
-    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
     {
-      "folke/tokyonight.nvim",
-      lazy = false,
-      priority = 1000,
-      opts = {},
+      -- src: https://github.com/jonhoo/configs/blob/master/editor/.config/nvim/init.lua
+      "wincent/base16-nvim",
+      lazy = false, -- load at start
+      priority = 1000, -- load first
       config = function()
-        -- Enable theme
-        vim.cmd("colorscheme tokyonight-night")
+        vim.cmd([[colorscheme gruvbox-dark-hard]])
+        vim.o.background = 'dark'
+        vim.cmd([[hi Normal ctermbg=NONE]])
+        -- Less visible window separator
+        vim.api.nvim_set_hl(0, "WinSeparator", { fg = 1250067 })
+        -- Make comments more prominent -- they are important.
+        local bools = vim.api.nvim_get_hl(0, { name = 'Boolean' })
+        vim.api.nvim_set_hl(0, 'Comment', bools)
+        -- Make it clearly visible which argument we're at.
+        local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
+        vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true })
       end
     },
+    -- add your plugins here
+    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -542,6 +551,9 @@ vim.lsp.enable('lua_ls')
 
 vim.opt.splitright = true
 
+vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+vim.opt.colorcolumn = '100'
+
 -- Use <Esc> to exit terminal mode
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 
@@ -588,3 +600,7 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc='[U]ndotreeToggle
 
 vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>', {desc='[G]it'})
 vim.keymap.set({ 'n' }, '<A-1>', '<cmd>Neotree<cr>')
+vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
+
+vim.keymap.set('n', '<leader>m', '<cmd>set tabstop=2<cr><bar><cmd>set shiftwidth=2<CR>')
+vim.keymap.set('n', '<C-a>', 'ggVG')
