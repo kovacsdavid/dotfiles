@@ -380,6 +380,14 @@ require("lazy").setup({
       "rcarriga/nvim-dap-ui",
       dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
     },
+    {
+      "folke/zen-mode.nvim",
+      opts = {},
+    },
+    {
+      "karb94/neoscroll.nvim",
+      opts = {},
+    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -608,6 +616,8 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
 vim.keymap.set('n', '<leader>m', '<cmd>set tabstop=2<cr><bar><cmd>set shiftwidth=2<CR>')
 vim.keymap.set('n', '<C-a>', 'ggVG')
+
+vim.keymap.set('n', '<F2>', vim.lsp.buf.rename)
 
 
 local dap = require("dap")
