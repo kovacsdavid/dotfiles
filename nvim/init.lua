@@ -156,8 +156,10 @@ require("lazy").setup({
               "--glob=!**/.vscode/*",
               "--glob=!**/build/*",
               "--glob=!**/dist/*",
+              "--glob=!**/target/*",
               "--glob=!**/yarn.lock",
               "--glob=!**/package-lock.json",
+              "--glob=!**/Cargo.lock",
             },
           },
           pickers = {
@@ -174,8 +176,10 @@ require("lazy").setup({
                 "--glob=!**/.vscode/*",
                 "--glob=!**/build/*",
                 "--glob=!**/dist/*",
+                "--glob=!**/target/*",
                 "--glob=!**/yarn.lock",
                 "--glob=!**/package-lock.json",
+                "--glob=!**/Cargo.lock",
               },
             },
             live_grep = {
