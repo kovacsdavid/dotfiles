@@ -297,7 +297,6 @@ require("lazy").setup({
         require("mason-lspconfig").setup({
           ensure_installed = {
             "lua_ls",
-            "rust_analyzer",
             "ts_ls",
           },
           handlers = {
@@ -347,14 +346,14 @@ require("lazy").setup({
               { name = 'buffer' },
             })
         })
-
         vim.diagnostic.config({
-          -- update_in_insert = true,
+          virtual_text = true,
+          virtual_lines = false,
           float = {
             focusable = false,
             style = "minimal",
             border = "rounded",
-            source = "always",
+            source = true,
             header = "",
             prefix = "",
           },
@@ -388,10 +387,10 @@ require("lazy").setup({
       "folke/zen-mode.nvim",
       opts = {},
     },
-    {
-      "karb94/neoscroll.nvim",
-      opts = {},
-    },
+--    {
+--      "karb94/neoscroll.nvim",
+--      opts = {},
+--    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -486,8 +485,15 @@ vim.lsp.config('rust_analyzer', {
   cmd = { "rust-analyzer" },
   settings = {
     ['rust-analyzer'] = {
+      checkOnSave = true,
+      check = {
+        command = "clippy"
+      },
       diagnostics = {
         enable = true;
+      },
+      trace = {
+        server = "off"
       }
     }
   },
@@ -567,7 +573,6 @@ vim.lsp.enable('lua_ls')
 
 vim.opt.splitright = true
 
-vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 vim.opt.colorcolumn = '100'
 
 -- Use <Esc> to exit terminal mode
@@ -597,6 +602,7 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 vim.keymap.set('n', '<leader>df', '<cmd>lua vim.diagnostic.open_float()<cr>', {desc='[D]iagnostic [F]loat'})
 vim.keymap.set('n', '<leader>dn', '<cmd>lua vim.diagnostic.goto_next()<cr>', {desc='[D]iagnostic [N]ext'})
 vim.keymap.set('n', '<leader>dp', '<cmd>lua vim.diagnostic.goto_prev()<cr>', {desc='[D]iagnostic [P]revious'})
+vim.keymap.set('n', '<leader>dr', '<cmd>lua vim.diagnostic.reset()<cr>', {desc='[D]iagnostic [R]eset'})
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -615,7 +621,7 @@ vim.keymap.set('n', '<leader>sb', '<cmd>set scb!<cr>', {desc='Toggle [S]croll[b]
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc='[U]ndotreeToggle'})
 
 vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>', {desc='[G]it'})
-vim.keymap.set({ 'n' }, '<A-1>', '<cmd>Neotree<cr>')
+vim.keymap.set('n', '<A-1>', '<cmd>Neotree<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
 vim.keymap.set('n', '<leader>m', '<cmd>set tabstop=2<cr><bar><cmd>set shiftwidth=2<CR>')
@@ -623,6 +629,8 @@ vim.keymap.set('n', '<C-a>', 'ggVG')
 
 vim.keymap.set('n', '<F2>', vim.lsp.buf.rename)
 
+vim.keymap.set('n', '<leader>qn', '<cmd>cn<cr>', {desc='[Q]uickFix [N]ext'})
+vim.keymap.set('n', '<leader>qp', '<cmd>cp<cr>', {desc='[Q]uickFix [P]revious'})
 
 local dap = require("dap")
 dap.adapters["rust-gdb"] = {
@@ -707,3 +715,14 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
+
+-- vim.g.neovide_fullscreen = true
+vim.o.guifont = "Hack Nerd Font:h11"
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function()
+    vim.opt_local.makeprg = "cargo clippy --all-targets --message-format=short"
+    vim.opt_local.errorformat = "%f:%l:%c: %t%*[^:]:%m"
+  end,
+})
