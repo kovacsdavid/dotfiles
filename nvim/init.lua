@@ -722,7 +722,15 @@ vim.o.guifont = "Hack Nerd Font:h11"
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
   callback = function()
-    vim.opt_local.makeprg = "cargo clippy --all-targets --message-format=short"
+    vim.opt_local.makeprg = "cargo clippy --all-targets --message-format=short -- -D warnings"
     vim.opt_local.errorformat = "%f:%l:%c: %t%*[^:]:%m"
   end,
 })
+
+-- src: https://github.com/neovide/neovide/discussions/2301#discussioncomment-8223203
+if vim.g.neovide then
+    vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+    vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+end
+
