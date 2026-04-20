@@ -266,10 +266,8 @@ require("lazy").setup({
       "tpope/vim-fugitive"
     },
     {
-      "neovim/nvim-lspconfig",
+      "hrsh7th/nvim-cmp",
       dependencies = {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
@@ -287,36 +285,6 @@ require("lazy").setup({
           {},
           vim.lsp.protocol.make_client_capabilities(),
           cmp_lsp.default_capabilities())
-
-        require("mason").setup()
-        require("mason-lspconfig").setup({
-          ensure_installed = {
-            "lua_ls",
-            "ts_ls",
-          },
-          handlers = {
-            function(server_name) -- default handler (optional)
-
-              require("lspconfig")[server_name].setup {
-                capabilities = capabilities
-              }
-            end,
-
-            ["lua_ls"] = function()
-              local lspconfig = require("lspconfig")
-              lspconfig.lua_ls.setup {
-                capabilities = capabilities,
-                settings = {
-                  Lua = {
-                    diagnostics = {
-                      globals = { "vim", "it", "describe", "before_each", "after_each" },
-                    }
-                  }
-                }
-              }
-            end,
-          }
-        })
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -536,19 +504,6 @@ vim.lsp.config('lua_ls', {
   settings = {
     Lua = {}
   }
-})
-
-local base_on_attach = vim.lsp.config.eslint.on_attach
-vim.lsp.config("eslint", {
-  on_attach = function(client, bufnr)
-    if not base_on_attach then return end
-
-    base_on_attach(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "LspEslintFixAll",
-    })
-  end,
 })
 
 vim.lsp.enable('eslint')
