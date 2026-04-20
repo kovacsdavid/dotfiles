@@ -132,7 +132,7 @@ require("lazy").setup({
     },
     { 'tpope/vim-sleuth' },
     {
-      'nvim-telescope/telescope.nvim', tag = '0.1.8',
+      'nvim-telescope/telescope.nvim',
       dependencies = { 'nvim-lua/plenary.nvim' },
       config = function()
         require('telescope').setup({
@@ -347,10 +347,6 @@ require("lazy").setup({
       dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
     },
     {
-      "folke/zen-mode.nvim",
-      opts = {},
-    },
-    {
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = {
@@ -359,10 +355,6 @@ require("lazy").setup({
         -- refer to the configuration section below
       }
     },
---    {
---      "karb94/neoscroll.nvim",
---      opts = {},
---    },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -512,6 +504,7 @@ vim.lsp.enable('ts_ls')
 vim.lsp.enable('lua_ls')
 
 vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 vim.opt.colorcolumn = '100'
 
