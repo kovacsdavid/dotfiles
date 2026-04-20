@@ -122,8 +122,6 @@ require("lazy").setup({
         vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true })
       end
     },
-    -- add your plugins here
-    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
     {
       'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -189,9 +187,6 @@ require("lazy").setup({
               theme = "dropdown",
             },
             help_tags = {
-              theme = "dropdown",
-            },
-            treesitter = {
               theme = "dropdown",
             },
             lsp_workspace_symbols = {
@@ -347,7 +342,7 @@ require("lazy").setup({
             })
         })
         vim.diagnostic.config({
-          virtual_text = true,
+          virtual_text = false,
           virtual_lines = false,
           float = {
             focusable = false,
@@ -387,6 +382,15 @@ require("lazy").setup({
       "folke/zen-mode.nvim",
       opts = {},
     },
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    },
 --    {
 --      "karb94/neoscroll.nvim",
 --      opts = {},
@@ -410,25 +414,6 @@ require("conform").setup({
     javascript = { "prettierd", "prettier", stop_after_first = true },
   },
 })
-
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "rust", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "typescript", "javascript", "html", "sql", "go" },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = false,
-  ---
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = { enable = true },
-
-  indent = { enable = true},
-}
 
 require('gitsigns').setup {
   signs = {
@@ -609,7 +594,6 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
-vim.keymap.set('n', '<leader>ft', builtin.treesitter, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>fs', builtin.lsp_workspace_symbols, { desc = 'Lists LSP document symbols in the current buffer' })
 
 vim.keymap.set('n', '<leader>bl', '<cmd>buffers<cr>', {desc='[B]uffer [L]ist'})
