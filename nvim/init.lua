@@ -97,29 +97,16 @@ vim.cmd('packadd! nohlsearch')
 
 vim.o.expandtab = true
 vim.o.smartindent = true
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     {
-      -- src: https://github.com/jonhoo/configs/blob/master/editor/.config/nvim/init.lua
-      "wincent/base16-nvim",
-      lazy = false, -- load at start
-      priority = 1000, -- load first
+      "morhetz/gruvbox",
       config = function()
-        vim.cmd([[colorscheme gruvbox-dark-hard]])
-        vim.o.background = 'dark'
-        vim.cmd([[hi Normal ctermbg=NONE]])
-        -- Less visible window separator
-        vim.api.nvim_set_hl(0, "WinSeparator", { fg = 1250067 })
-        -- Make comments more prominent -- they are important.
-        local bools = vim.api.nvim_get_hl(0, { name = 'Boolean' })
-        vim.api.nvim_set_hl(0, 'Comment', bools)
-        -- Make it clearly visible which argument we're at.
-        local marked = vim.api.nvim_get_hl(0, { name = 'PMenu' })
-        vim.api.nvim_set_hl(0, 'LspSignatureActiveParameter', { fg = marked.fg, bg = marked.bg, ctermfg = marked.ctermfg, ctermbg = marked.ctermbg, bold = true })
+        vim.cmd.colorscheme("gruvbox")
       end
     },
     {
@@ -196,49 +183,49 @@ require("lazy").setup({
         })
       end
     },
-    {
-      "folke/which-key.nvim",
-      event = "VeryLazy",
-      opts = {},
-    },
+--    {
+--      "folke/which-key.nvim",
+--      event = "VeryLazy",
+--      opts = {},
+--    },
     {"lewis6991/gitsigns.nvim"},
-    {
-      "folke/trouble.nvim",
-      opts = {}, -- for default options, refer to the configuration section for custom setup.
-      cmd = "Trouble",
-      keys = {
-        {
-          "<leader>xx",
-          "<cmd>Trouble diagnostics toggle<cr>",
-          desc = "Diagnostics (Trouble)",
-        },
-        {
-          "<leader>xX",
-          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-          desc = "Buffer Diagnostics (Trouble)",
-        },
-        {
-          "<leader>cs",
-          "<cmd>Trouble symbols toggle focus=false<cr>",
-          desc = "Symbols (Trouble)",
-        },
-        {
-          "<leader>cl",
-          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-          desc = "LSP Definitions / references / ... (Trouble)",
-        },
-        {
-          "<leader>xL",
-          "<cmd>Trouble loclist toggle<cr>",
-          desc = "Location List (Trouble)",
-        },
-        {
-          "<leader>xQ",
-          "<cmd>Trouble qflist toggle<cr>",
-          desc = "Quickfix List (Trouble)",
-        },
-      },
-    },
+--    {
+--      "folke/trouble.nvim",
+--      opts = {}, -- for default options, refer to the configuration section for custom setup.
+--      cmd = "Trouble",
+--      keys = {
+--        {
+--          "<leader>xx",
+--          "<cmd>Trouble diagnostics toggle<cr>",
+--          desc = "Diagnostics (Trouble)",
+--        },
+--        {
+--          "<leader>xX",
+--          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+--          desc = "Buffer Diagnostics (Trouble)",
+--        },
+--        {
+--          "<leader>cs",
+--          "<cmd>Trouble symbols toggle focus=false<cr>",
+--          desc = "Symbols (Trouble)",
+--        },
+--        {
+--          "<leader>cl",
+--          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+--          desc = "LSP Definitions / references / ... (Trouble)",
+--        },
+--        {
+--          "<leader>xL",
+--          "<cmd>Trouble loclist toggle<cr>",
+--          desc = "Location List (Trouble)",
+--        },
+--        {
+--          "<leader>xQ",
+--          "<cmd>Trouble qflist toggle<cr>",
+--          desc = "Quickfix List (Trouble)",
+--        },
+--      },
+--    },
 --    {
 --      "github/copilot.vim"
 --    },
@@ -332,16 +319,16 @@ require("lazy").setup({
       event = "VeryLazy",
       opts = {},
     },
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
-        "nvim-tree/nvim-web-devicons", -- optional, but recommended
-      },
-      lazy = false, -- neo-tree will lazily load itself
-    },
+--    {
+--      "nvim-neo-tree/neo-tree.nvim",
+--      branch = "v3.x",
+--      dependencies = {
+--        "nvim-lua/plenary.nvim",
+--        "MunifTanjim/nui.nvim",
+--        "nvim-tree/nvim-web-devicons", -- optional, but recommended
+--      },
+--      lazy = false, -- neo-tree will lazily load itself
+--    },
     {
       "rcarriga/nvim-dap-ui",
       dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
@@ -356,10 +343,6 @@ require("lazy").setup({
       }
     },
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
   checker = { enabled = false },
 })
 
@@ -521,8 +504,6 @@ vim.keymap.set({ 'n' }, '<A-j>', '<C-w>j')
 vim.keymap.set({ 'n' }, '<A-k>', '<C-w>k')
 vim.keymap.set({ 'n' }, '<A-l>', '<C-w>l')
 
-vim.keymap.set('n', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
-vim.keymap.set('v', '0', '^', {desc='Remap VIM 0 to first non-blank character'})
 vim.keymap.set('n', '<C-n>', '<cmd>:noh<cr>', {desc='Remove search highlight'})
 
 -- Disable arrow keys in normal mode
@@ -547,13 +528,14 @@ vim.keymap.set('n', '<leader>fs', builtin.lsp_workspace_symbols, { desc = 'Lists
 vim.keymap.set('n', '<leader>bl', '<cmd>buffers<cr>', {desc='[B]uffer [L]ist'})
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', {desc='[B]uffer [N]ext'})
 vim.keymap.set('n', '<leader>bp', '<cmd>bprevious<cr>', {desc='[B]uffer [P]revious'})
+vim.keymap.set('n', '<leader>bdo', '<cmd>%bd|e#<cr>', {desc='[B]uffer [D]elete [O]thers'})
 
 vim.keymap.set('n', '<leader>sb', '<cmd>set scb!<cr>', {desc='Toggle [S]croll[b]ind'})
 
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, {desc='[U]ndotreeToggle'})
 
 vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>', {desc='[G]it'})
-vim.keymap.set('n', '<A-1>', '<cmd>Neotree<cr>')
+vim.keymap.set('n', '<A-1>', '<cmd>Ex<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
 
 vim.keymap.set('n', '<leader>m', '<cmd>set tabstop=2<cr><bar><cmd>set shiftwidth=2<CR>')
@@ -666,3 +648,11 @@ if vim.g.neovide then
     vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
 end
 
+vim.api.nvim_create_user_command("Scratch", function(opts)
+  vim.cmd("enew")
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "hide"
+  vim.bo.swapfile = false
+  vim.bo.buflisted = true
+  vim.api.nvim_buf_set_name(0, opts.args ~= "" and opts.args or "Scratch")
+end, { nargs = "?" })
