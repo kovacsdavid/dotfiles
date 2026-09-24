@@ -104,10 +104,29 @@ vim.o.shiftwidth = 4
 require("lazy").setup({
   spec = {
     {
-      "morhetz/gruvbox",
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
       config = function()
-        vim.cmd.colorscheme("gruvbox")
-      end
+        require("catppuccin").setup({
+          flavour = "mocha", -- latte, frappe, macchiato, mocha
+        })
+        vim.cmd.colorscheme("catppuccin")
+      end,
+    },
+    {
+      "folke/zen-mode.nvim",
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    },
+    {
+      "RRethy/vim-illuminate",
+      config = function()
+        require("illuminate").configure()
+      end,
     },
     {
       'nvim-lualine/lualine.nvim',
@@ -183,49 +202,67 @@ require("lazy").setup({
         })
       end
     },
+    {
+      "kylechui/nvim-surround",
+      version = "^4.0.0", -- Use for stability; omit to use `main` branch for the latest features
+      event = "VeryLazy",
+      -- Optional: See `:h nvim-surround.configuration` and `:h nvim-surround.setup` for details
+      -- config = function()
+      --     require("nvim-surround").setup({
+      --         -- Put your configuration here
+      --     })
+      -- end
+    },
 --    {
 --      "folke/which-key.nvim",
 --      event = "VeryLazy",
 --      opts = {},
 --    },
     {"lewis6991/gitsigns.nvim"},
---    {
---      "folke/trouble.nvim",
---      opts = {}, -- for default options, refer to the configuration section for custom setup.
---      cmd = "Trouble",
---      keys = {
---        {
---          "<leader>xx",
---          "<cmd>Trouble diagnostics toggle<cr>",
---          desc = "Diagnostics (Trouble)",
---        },
---        {
---          "<leader>xX",
---          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
---          desc = "Buffer Diagnostics (Trouble)",
---        },
---        {
---          "<leader>cs",
---          "<cmd>Trouble symbols toggle focus=false<cr>",
---          desc = "Symbols (Trouble)",
---        },
---        {
---          "<leader>cl",
---          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
---          desc = "LSP Definitions / references / ... (Trouble)",
---        },
---        {
---          "<leader>xL",
---          "<cmd>Trouble loclist toggle<cr>",
---          desc = "Location List (Trouble)",
---        },
---        {
---          "<leader>xQ",
---          "<cmd>Trouble qflist toggle<cr>",
---          desc = "Quickfix List (Trouble)",
---        },
---      },
---    },
+    {
+      "folke/trouble.nvim",
+      opts = {}, -- for default options, refer to the configuration section for custom setup.
+      cmd = "Trouble",
+      keys = {
+        {
+          "<leader>xx",
+          "<cmd>Trouble diagnostics toggle<cr>",
+          desc = "Diagnostics (Trouble)",
+        },
+        {
+          "<leader>xX",
+          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+          desc = "Buffer Diagnostics (Trouble)",
+        },
+        {
+          "<leader>cs",
+          "<cmd>Trouble symbols toggle focus=false<cr>",
+          desc = "Symbols (Trouble)",
+        },
+        {
+          "<leader>cl",
+          "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+          desc = "LSP Definitions / references / ... (Trouble)",
+        },
+        {
+          "<leader>xL",
+          "<cmd>Trouble loclist toggle<cr>",
+          desc = "Location List (Trouble)",
+        },
+        {
+          "<leader>xQ",
+          "<cmd>Trouble qflist toggle<cr>",
+          desc = "Quickfix List (Trouble)",
+        },
+      },
+      -- Lua
+      {
+        "folke/persistence.nvim",
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        opts = {
+          -- add any custom options here
+        }
+      },
 --    {
 --      "github/copilot.vim"
 --    },
@@ -274,7 +311,7 @@ require("lazy").setup({
           cmp_lsp.default_capabilities())
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
+        
         cmp.setup({
           snippet = {
             expand = function(args)
@@ -342,9 +379,30 @@ require("lazy").setup({
         -- refer to the configuration section below
       }
     },
+    {
+      'stevearc/aerial.nvim',
+      opts = {},
+      -- Optional dependencies
+      dependencies = {
+         "nvim-treesitter/nvim-treesitter",
+         "nvim-tree/nvim-web-devicons"
+      },
+      config = function()
+        require("aerial").setup({
+          -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+          on_attach = function(bufnr)
+            -- Jump forwards/backwards with '{' and '}'
+            vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+            vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+          end,
+        })
+        -- You probably also want to set a keymap to toggle aerial
+        vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+      end
+    },
   },
   checker = { enabled = false },
-})
+}})
 
 require("conform").setup({
   formatters_by_ft = {
@@ -631,7 +689,7 @@ dap.listeners.before.event_exited.dapui_config = function()
 end
 
 -- vim.g.neovide_fullscreen = true
-vim.o.guifont = "Hack Nerd Font:h11"
+vim.o.guifont = "Hack Nerd Font:h10"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
@@ -656,3 +714,116 @@ vim.api.nvim_create_user_command("Scratch", function(opts)
   vim.bo.buflisted = true
   vim.api.nvim_buf_set_name(0, opts.args ~= "" and opts.args or "Scratch")
 end, { nargs = "?" })
+
+vim.o.foldmethod = 'indent'
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- format on save
+local augroup = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
+
+local js_patterns = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.mjs", "*.cjs", "*.mts", "*.cts" }
+
+local function prettier_cmd(bufnr)
+  local file = vim.api.nvim_buf_get_name(bufnr)
+  if file == "" then
+    return nil
+  end
+
+  local dir = vim.fs.dirname(file)
+
+  -- Look upward for a local project prettier first.
+  local local_bin = vim.fs.find("node_modules/.bin/prettier", {
+    path = dir,
+    upward = true,
+    type = "file",
+  })[1]
+
+  if local_bin then
+    return { local_bin, "--write", file }
+  end
+
+  -- Fallback: use the project's installed prettier through npx.
+  if vim.fn.executable("npx") == 1 then
+    return { "npx", "--no-install", "prettier", "--write", file }
+  end
+
+  return nil
+end
+
+local function prettier_format(bufnr)
+  local file = vim.api.nvim_buf_get_name(bufnr)
+
+  if file == "" or vim.bo[bufnr].buftype ~= "" then
+    return
+  end
+
+  if vim.fn.filereadable(file) == 0 then
+    return
+  end
+
+  local cmd = prettier_cmd(bufnr)
+  if not cmd then
+    vim.notify("Could not find Prettier or npx", vim.log.levels.WARN)
+    return
+  end
+
+  local result = vim.system(cmd, { text = true }):wait()
+
+  if result.code ~= 0 then
+    local msg = result.stderr
+    if not msg or msg == "" then
+      msg = result.stdout
+    end
+    if not msg or msg == "" then
+      msg = "unknown error"
+    end
+
+    vim.notify("Prettier failed:\n" .. msg, vim.log.levels.ERROR)
+    return
+  end
+
+  -- Reload only if the buffer is still valid and unchanged since write.
+  if vim.api.nvim_buf_is_valid(bufnr) then
+    vim.cmd("checktime " .. bufnr)
+  end
+end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup,
+  pattern = "*.rs",
+  callback = function(args)
+    vim.lsp.buf.format({
+      bufnr = args.buf,
+      async = false,
+    })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = augroup,
+  pattern = js_patterns,
+  callback = function(args)
+    prettier_format(args.buf)
+  end,
+})
+-- end: format on save
+
+vim.keymap.set("x", "p", '"_dP')
+
+-- load the session for the current directory
+vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
+
+-- select a session to load
+vim.keymap.set("n", "<leader>qS", function() require("persistence").select() end)
+
+-- load the last session
+vim.keymap.set("n", "<leader>ql", function() require("persistence").load({ last = true }) end)
+
+-- stop Persistence => session won't be saved on exit
+vim.keymap.set("n", "<leader>qd", function() require("persistence").stop() end)
+
+-- code action shortcut for easier imports
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
