@@ -488,6 +488,11 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.config('ts_ls', {
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   cmd = { "typescript-language-server", "--stdio" },
+  init_options = {
+    preferences = {
+      importModuleSpecifierPreference = "non-relative",
+    },
+  },
 })
 
 vim.lsp.config('lua_ls', {
@@ -689,7 +694,7 @@ dap.listeners.before.event_exited.dapui_config = function()
 end
 
 -- vim.g.neovide_fullscreen = true
-vim.o.guifont = "Hack Nerd Font:h10"
+vim.o.guifont = "Hack Nerd Font:h9.5"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",
