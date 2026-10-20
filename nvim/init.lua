@@ -816,7 +816,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 -- end: format on save
 
-vim.keymap.set("x", "p", '"_dP')
+vim.keymap.set("x", "p", "P")
 
 -- load the session for the current directory
 vim.keymap.set("n", "<leader>qs", function() require("persistence").load() end)
